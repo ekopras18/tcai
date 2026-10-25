@@ -1,0 +1,6 @@
+{
+  "name": "TCAI Information Technology co. ltd.",
+  "description": "Official corporate profile for TCAI Information Technology co. ltd. — Specialists in Translate, ASR, TTS, Data Collection, and Video Service.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
