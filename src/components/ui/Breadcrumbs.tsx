@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigation } from "../../context/NavigationContext";
+import { useLanguage } from "../../context/LanguageContext";
 import { ChevronRight } from "lucide-react";
 
 interface BreadcrumbsProps {
@@ -9,6 +10,7 @@ interface BreadcrumbsProps {
 
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ currentPage, parentPage }) => {
   const { navigate } = useNavigation();
+  const { t } = useLanguage();
 
   return (
     <nav aria-label="Breadcrumb" className="py-4">
@@ -16,9 +18,9 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ currentPage, parentPag
         <li>
           <button
             onClick={() => navigate("/")}
-            className="hover:text-blue-600 transition-colors"
+            className="hover:text-blue-600 transition-colors cursor-pointer"
           >
-            Home
+            {t.nav.home}
           </button>
         </li>
         {parentPage && (
@@ -26,7 +28,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ currentPage, parentPag
             <ChevronRight className="w-3.5 h-3.5 text-slate-400" aria-hidden="true" />
             <button
               onClick={() => navigate(parentPage.href)}
-              className="hover:text-blue-600 transition-colors"
+              className="hover:text-blue-600 transition-colors cursor-pointer"
             >
               {parentPage.name}
             </button>
@@ -42,3 +44,5 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ currentPage, parentPag
     </nav>
   );
 };
+
+export default Breadcrumbs;

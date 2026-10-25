@@ -1,11 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { COMPANY_INFO } from "../../data/company";
+import { useLanguage } from "../../context/LanguageContext";
 import { SectionHeading } from "../ui/SectionHeading";
 import { FadeInView, StaggerContainer, StaggerItem } from "../ui/FadeInView";
 import { Users, Award, Layers } from "lucide-react";
 
 export const CompanyIntro: React.FC = () => {
+  const { t } = useLanguage();
+
   const pillarIcons = [
     <Users key="users" className="w-5 h-5 text-blue-600" aria-hidden="true" />,
     <Award key="award" className="w-5 h-5 text-blue-600" aria-hidden="true" />,
@@ -18,15 +20,15 @@ export const CompanyIntro: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           <FadeInView direction="up" className="lg:col-span-5 space-y-6">
             <SectionHeading
-              kicker="About TCAI"
-              title={COMPANY_INFO.introTitle}
-              description={COMPANY_INFO.introDescription}
+              kicker={t.companyIntro.kicker}
+              title={t.companyIntro.title}
+              description={t.companyIntro.description}
             />
           </FadeInView>
 
           <div className="lg:col-span-7">
             <StaggerContainer staggerDelay={0.12} className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {COMPANY_INFO.pillars.map((pillar, idx) => (
+              {t.companyIntro.pillars.map((pillar, idx) => (
                 <StaggerItem key={pillar.title} className="h-full">
                   <motion.div
                     whileHover={{ y: -4 }}
@@ -54,3 +56,5 @@ export const CompanyIntro: React.FC = () => {
     </section>
   );
 };
+
+export default CompanyIntro;

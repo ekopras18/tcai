@@ -23,6 +23,24 @@ export interface TestimonialItem {
     value: string;
   }[];
   themeColor: "indigo" | "violet" | "amber" | "teal" | "rose";
+  th?: {
+    serviceLabel: string;
+    partnerType: string;
+    clientIndustry: string;
+    authorRole: string;
+    quote: string;
+    challenge: string;
+    solution: string;
+    keyMetric: {
+      value: string;
+      label: string;
+      detail: string;
+    };
+    additionalMetrics: {
+      label: string;
+      value: string;
+    }[];
+  };
 }
 
 export const TESTIMONIALS_DATA: TestimonialItem[] = [
@@ -54,7 +72,29 @@ export const TESTIMONIALS_DATA: TestimonialItem[] = [
       { label: "Timestamp Precision", value: "<15ms drift" },
       { label: "Lexical Normalization", value: "100% audited" }
     ],
-    themeColor: "violet"
+    themeColor: "violet",
+    th: {
+      serviceLabel: "รู้จำเสียงพูด ASR (Speech Recognition)",
+      partnerType: "พันธมิตรด้านสถาปัตยกรรม Speech AI",
+      clientIndustry: "ศูนย์บริการลูกค้าคลาวด์และระบบ IVR สนทนา",
+      authorRole: "รองประธานฝ่ายวิศวกรรมอะคูสติก",
+      quote:
+        "TCAI ส่งมอบคลังข้อมูลเสียงพร้อม Timecode ระดับโฟเนติกที่แม่นยำ ครอบคลุมสำเนียงท้องถิ่นหลากหลาย ซึ่งช่วยลดอัตราความผิดพลาดของคำ (WER) ในโปรดักชันของเราลงถึง 32% ทีมงานอะคูสติกของพวกเขามีความเข้าใจลึกซึ้งในข้อจำกัดแบนด์วิดท์โทรศัพท์ และการตัดเสียงรบกวนอย่างยอดเยี่ยม",
+      challenge:
+        "อัตราความผิดพลาดของคำ (WER > 24%) ในการสนทนาภาษาท้องถิ่นและภาษาผสมผสานผ่านสาย VoIP คุณภาพต่ำ",
+      solution:
+        "จัดเตรียมคลังข้อมูลเสียงอะคูสติกที่ซิงค์เวลาแม่นยำกว่า 1,200 ชั่วโมง พร้อมการปรับมาตรฐานคำศัพท์และการแยกแยะช่องสัญญาณเสียงสองทิศทาง",
+      keyMetric: {
+        value: "-32%",
+        label: "ลดอัตราความผิดพลาด WER",
+        detail: "อัตราความผิดพลาดของคำลดลงอย่างชัดเจนในสำเนียงท้องถิ่น"
+      },
+      additionalMetrics: [
+        { label: "ปริมาณคลังเสียง", value: "1,200+ ชม." },
+        { label: "ความแม่นยำ Timecode", value: "<15ms drift" },
+        { label: "มาตรฐานคำศัพท์", value: "ตรวจสอบ 100%" }
+      ]
+    }
   },
   {
     id: "testimonial-translate",
@@ -84,7 +124,29 @@ export const TESTIMONIALS_DATA: TestimonialItem[] = [
       { label: "String Length Compliance", value: "100%" },
       { label: "Pipeline Turnaround", value: "48h Sprint SLA" }
     ],
-    themeColor: "indigo"
+    themeColor: "indigo",
+    th: {
+      serviceLabel: "แปลภาษาและการปรับให้เหมาะกับท้องถิ่น (Translate)",
+      partnerType: "พันธมิตรการปรับภาษาและเนื้อหาระดับโลก",
+      clientIndustry: "B2B SaaS ข้ามพรมแดนและโครงสร้างพื้นฐานนักพัฒนา",
+      authorRole: "หัวหน้าฝ่ายโลคัลไลเซชันสากล (i18n)",
+      quote:
+        "การแปลเอกสารทางเทคนิคและคอนโซลนักพัฒนาของเราใน 14 คู่ภาษาเอเชียต้องการระเบียบแบบแผนคำศัพท์ที่เข้มงวด นักภาษาศาสตร์ของ TCAI รักษาความสม่ำเสมอของคำศัพท์ได้สูงถึง 99.4% พร้อมทั้งควบคุมความยาวตัวอักษรของ UI ได้อย่างสมบูรณ์แบบ",
+      challenge:
+        "เอกสาร API ไม่สอดคล้องกัน และข้อความปุ่ม UI ล้นเกินขนาดที่กำหนดในตัวแปรภาษาแถบเอเชีย",
+      solution:
+        "เชื่อมโยงฐานความจำการแปล (TM) ปรับตามข้อจำกัดความยาวตัวอักษร และใช้ระเบียบวิธี TEP (แปล, บรรณาธิกร, พิสูจน์อักษร) โดยเจ้าของภาษา",
+      keyMetric: {
+        value: "99.4%",
+        label: "ความสม่ำเสมอของคำศัพท์",
+        detail: "ตรวจสอบเทียบกับอภิธานศัพท์กลางใน 14 สาขาภาษา"
+      },
+      additionalMetrics: [
+        { label: "คู่ภาษาที่รองรับ", value: "14 ภาษา" },
+        { label: "ความยาว UI พอดี", value: "100%" },
+        { label: "รอบส่งมอบงาน", value: "รอบสปรินต์ 48 ชม." }
+      ]
+    }
   },
   {
     id: "testimonial-tts",
@@ -114,7 +176,29 @@ export const TESTIMONIALS_DATA: TestimonialItem[] = [
       { label: "Phoneme Balance", value: "Full IPA Coverage" },
       { label: "Prosody Latency", value: "<120ms streaming" }
     ],
-    themeColor: "amber"
+    themeColor: "amber",
+    th: {
+      serviceLabel: "สังเคราะห์เสียงพูด TTS (Voice Synthesis)",
+      partnerType: "ลูกค้าด้าน Synthetic Voice AI",
+      clientIndustry: "ระบบสั่งการด้วยเสียงในรถยนต์และสมาร์ตโฮม",
+      authorRole: "หัวหน้านักวิจัยด้านการสังเคราะห์เสียงพูด",
+      quote:
+        "การสร้างเสียงสังเคราะห์ที่ถ่ายทอดอารมณ์และเป็นธรรมชาติต้องการความสมบูรณ์ของเสียงโฟเนติกและจังหวะวรรณยุกต์ที่ลื่นไหล TCAI ช่วยปรับแต่งพรอมต์ SSML และบันทึกเสียงสตูดิโอ 48kHz คุณภาพสูง จนได้คะแนนความพึงพอใจ MOS สูงถึง 4.84 จากการทดสอบของผู้ใช้จริง",
+      challenge:
+        "เสียงสังเคราะห์ฟังดูแข็งกระด้างเหมือนหุ่นยนต์และทำให้ผู้ฟังรู้สึกล้าในระหว่างการนำทางระบบสนทนายาวๆ",
+      solution:
+        "ออกแบบสคริปต์อะคูสติกที่ผสานการปรับอารมณ์ จุดหยุดหายใจ การปรับระดับเสียงตามจังหวะธรรมชาติ และมาสเตอร์เสียง 24-bit/48kHz ในสตูดิโอกันเสียง",
+      keyMetric: {
+        value: "4.84 / 5.0",
+        label: "คะแนนความคิดเห็นเฉลี่ย (MOS)",
+        detail: "การประเมินความเป็นธรรมชาติแบบ Double-blind ในการทดสอบผู้ใช้"
+      },
+      additionalMetrics: [
+        { label: "อัตราสุ่มตัวอย่างเสียง", value: "48kHz / 24-bit" },
+        { label: "ความครอบคลุมโฟเนติก", value: "IPA ครบถ้วน" },
+        { label: "ความหน่วงการสตรีม", value: "<120ms" }
+      ]
+    }
   },
   {
     id: "testimonial-data-collection",
@@ -144,7 +228,29 @@ export const TESTIMONIALS_DATA: TestimonialItem[] = [
       { label: "PII Scrubbing", value: "100% Anonymized" },
       { label: "Validation Batches", value: "Daily QA Loops" }
     ],
-    themeColor: "teal"
+    themeColor: "teal",
+    th: {
+      serviceLabel: "เก็บรวบรวมชุดข้อมูล AI และกำกับข้อมูล (Data Collection)",
+      partnerType: "พันธมิตรจัดเตรียมข้อมูลฝึกสอน Generative AI",
+      clientIndustry: "การวิจัยโมเดลพื้นฐาน LLM และ Multimodal AI",
+      authorRole: "ผู้อำนวยการฝ่ายชุดข้อมูล AI หลายภาษา",
+      quote:
+        "สำหรับการฝึกสอนโมเดลพื้นฐานระดับภูมิภาค ข้อมูลที่ดึงจากเว็บสาธารณะมีความสกปรกเกินไป TCAI เข้ามาบริหารการเก็บรวบรวมข้อมูลตามหลักจริยธรรมจากหลากหลายกลุ่มประชากรใน 30+ จังหวัด ด้วยความสอดคล้องของผู้ตรวจ (IAA) สูงถึง 99.2% และการปกปิดข้อมูล PII อย่างรัดกุม",
+      challenge:
+        "อคติทางประชากรและความเป็นพิษของข้อมูลที่ส่งผลให้โมเดลเกิดอาการหลอน (Hallucination) จากการกวาดข้อมูลเว็บสาธารณะ",
+      solution:
+        "คัดเลือกเจ้าของภาษามากกว่า 4,000 คนเพื่อรวบรวมบทสนทนาแบบโต้ตอบ การกำกับเจตนา (Intent) และการลบข้อมูลระบุตัวตน PII ตามมาตรฐาน ISO",
+      keyMetric: {
+        value: "99.2%",
+        label: "ความสอดคล้องของผู้ตรวจ (IAA)",
+        detail: "คะแนน Cohen's Kappa จากชุดข้อมูลประเมินที่มีผู้ตรวจสองคน"
+      },
+      additionalMetrics: [
+        { label: "จำนวนผู้ร่วมโครงการ", value: "4,000+ คน" },
+        { label: "การลบข้อมูล PII", value: "ปกปิดตัวตน 100%" },
+        { label: "รอบการตรวจสอบ", value: "ลูป QA ประจำวัน" }
+      ]
+    }
   },
   {
     id: "testimonial-video-service",
@@ -174,6 +280,28 @@ export const TESTIMONIALS_DATA: TestimonialItem[] = [
       { label: "Audio Loudness", value: "-24 LKFS Broadcast" },
       { label: "On-Screen Graphic Sync", value: "100% Pixel Aligned" }
     ],
-    themeColor: "rose"
+    themeColor: "rose",
+    th: {
+      serviceLabel: "บริการงานวิดีโอและสื่อหลายภาษา (Video Service)",
+      partnerType: "พันธมิตรสตรีมมิงและสตูดิโอสื่อข้ามชาติ",
+      clientIndustry: "แพลตฟอร์มการศึกษาสตรีมมิงและสื่อองค์กรแบบโต้ตอบ",
+      authorRole: "ผู้อำนวยการผลิตเนื้อหาหลายภาษา",
+      quote:
+        "TCAI รับผิดชอบงานแปล ทำคำบรรยาย และปรับปรุงภาพกราฟิกบนหน้าจอสำหรับแคตตาล็อกหลักสูตรเทคนิคทั้งหมดของเรา คำบรรยายที่ซิงค์ระดับเฟรมและการพากย์เสียงมีค่าความคลาดเคลื่อนเพียง ±15ms ในไฟล์มาสเตอร์ระดับ 4K โดยไม่เคยส่งงานล่าช้าเลยแม้แต่ครั้งเดียว",
+      challenge:
+        "การจัดการซับไตเติลที่ต้องซิงค์ตรงระดับเฟรม และการแก้ไขข้อความกราฟิกบนหน้าจอในวิดีโอความละเอียดสูงกว่า 200 ชั่วโมง",
+      solution:
+        "จัดทำมาสเตอร์ SRT/VTT ที่ซิงค์เวลาแม่นยำ เปลี่ยนข้อความบนจอผ่านโมชันกราฟิก After Effects และปรับระดับความดังเสียงตามมาตรฐานบรอดคาสต์ (-24 LKFS)",
+      keyMetric: {
+        value: "±15ms",
+        label: "ความคลาดเคลื่อนซับไตเติล",
+        detail: "ความแม่นยำระดับเฟรมในไฟล์มาสเตอร์ 4K ทั้งหมด"
+      },
+      additionalMetrics: [
+        { label: "ชั่วโมงวิดีโอทั้งหมด", value: "200+ ชม." },
+        { label: "มาตรฐานเสียง", value: "-24 LKFS Broadcast" },
+        { label: "กราฟิกบนหน้าจอ", value: "จัดวางแม่นยำ 100%" }
+      ]
+    }
   }
 ];

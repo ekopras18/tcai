@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useNavigation } from "../../context/NavigationContext";
+import { useLanguage } from "../../context/LanguageContext";
 import { SectionHeading } from "../ui/SectionHeading";
 import { FadeInView, StaggerContainer, StaggerItem } from "../ui/FadeInView";
 import { 
@@ -12,131 +13,55 @@ import {
   ArrowRight
 } from "lucide-react";
 
-interface OverviewCard {
-  id: string;
-  title: string;
-  category: string;
-  description: string;
-  icon: React.ReactNode;
-  anchor: string;
-  themeColor: "indigo" | "violet" | "amber" | "teal" | "rose";
-  domainSnippet: string;
-  metricBadge: string;
-  specs: string[];
-}
-
 export const ServicesOverview: React.FC = () => {
   const { navigate } = useNavigation();
+  const { t } = useLanguage();
 
-  const servicesList: OverviewCard[] = [
-    {
-      id: "translate",
-      title: "Translate",
-      category: "Language & Localization",
-      description:
-        "Professional human translation and localization services supporting multilingual enterprise communication, technical manuals, and software interfaces.",
-      icon: <Languages className="w-6 h-6 text-indigo-600" aria-hidden="true" />,
-      anchor: "translate",
-      themeColor: "indigo",
-      domainSnippet: "EN ⇄ JA / ID / DE / ES",
-      metricBadge: "99.2% Terminology Precision",
-      specs: ["Native TEP Review", "Custom TM & Glossaries", "UI & Manuals"]
-    },
-    {
-      id: "asr",
-      title: "ASR (Speech Recognition)",
-      category: "Speech Technology",
-      description:
-        "Automatic speech recognition acoustic data preparation, verbatim transcription, time-aligned phonetic validation, and acoustic model tuning.",
-      icon: <AudioWaveform className="w-6 h-6 text-violet-600" aria-hidden="true" />,
-      anchor: "asr",
-      themeColor: "violet",
-      domainSnippet: "±10ms Phoneme Boundaries",
-      metricBadge: "WER < 4.2% Benchmark",
-      specs: ["48kHz Studio & Field Audio", "Multi-Speaker Diarization", "SNR Tagging"]
-    },
-    {
-      id: "tts",
-      title: "TTS (Text-to-Speech)",
-      category: "Speech Technology",
-      description:
-        "Synthetic voice evaluation, Mean Opinion Score (MOS) benchmark testing, prosody calibration, and pronunciation lexicons for neural voice models.",
-      icon: <Volume2 className="w-6 h-6 text-amber-600" aria-hidden="true" />,
-      anchor: "tts",
-      themeColor: "amber",
-      domainSnippet: "Neural Prosody & Pitch Contour",
-      metricBadge: "4.82 / 5.00 MOS Score",
-      specs: ["Native Listening Panels", "G2P Dictionary Auditing", "Vocal Warmth Scoring"]
-    },
-    {
-      id: "data-collection",
-      title: "Data Collection",
-      category: "AI Data Solutions",
-      description:
-        "Structured speech, text, audio, and multimodal data collection and annotation pipelines designed to train and benchmark production AI models.",
-      icon: <Database className="w-6 h-6 text-teal-600" aria-hidden="true" />,
-      anchor: "data-collection",
-      themeColor: "teal",
-      domainSnippet: "Multi-Turn Dialogue & NER",
-      metricBadge: "99.1% Inter-Annotator Agreement",
-      specs: ["Multi-Speaker Speech Corpus", "Strict PII Scrubbing", "Schema Tagging"]
-    },
-    {
-      id: "video-service",
-      title: "Video Service",
-      category: "Media Production",
-      description:
-        "Comprehensive video editing, product demo walkthroughs, motion graphics, promotional cutdowns, and synchronized multilingual subtitling.",
-      icon: <Video className="w-6 h-6 text-rose-600" aria-hidden="true" />,
-      anchor: "video-service",
-      themeColor: "rose",
-      domainSnippet: "SMPTE 4K 60fps Masters",
-      metricBadge: "Subtitle Drift ±15ms",
-      specs: ["NLE Precision Post-Cuts", "Motion Graphics & UI Callouts", "SRT/VTT Burn-ins"]
-    }
-  ];
+  const serviceIcons = {
+    translate: <Languages className="w-6 h-6 text-indigo-600" aria-hidden="true" />,
+    asr: <AudioWaveform className="w-6 h-6 text-violet-600" aria-hidden="true" />,
+    tts: <Volume2 className="w-6 h-6 text-amber-600" aria-hidden="true" />,
+    "data-collection": <Database className="w-6 h-6 text-teal-600" aria-hidden="true" />,
+    "video-service": <Video className="w-6 h-6 text-rose-600" aria-hidden="true" />
+  };
 
-  const getThemeClasses = (color: OverviewCard["themeColor"]) => {
-    switch (color) {
-      case "indigo":
+  const getThemeClasses = (serviceId: string) => {
+    switch (serviceId) {
+      case "translate":
         return {
           iconBg: "bg-indigo-50 border-indigo-200/80",
           hoverBorder: "hover:border-indigo-300",
           textHover: "group-hover:text-indigo-600",
-          badgeBg: "bg-indigo-50 text-indigo-700 border-indigo-200",
-          snippetBg: "bg-indigo-950/5 text-indigo-900 border-indigo-100"
+          badgeBg: "bg-indigo-50 text-indigo-700 border-indigo-200"
         };
-      case "violet":
+      case "asr":
         return {
           iconBg: "bg-violet-50 border-violet-200/80",
           hoverBorder: "hover:border-violet-300",
           textHover: "group-hover:text-violet-600",
-          badgeBg: "bg-violet-50 text-violet-700 border-violet-200",
-          snippetBg: "bg-violet-950/5 text-violet-900 border-violet-100"
+          badgeBg: "bg-violet-50 text-violet-700 border-violet-200"
         };
-      case "amber":
+      case "tts":
         return {
           iconBg: "bg-amber-50 border-amber-200/80",
           hoverBorder: "hover:border-amber-300",
           textHover: "group-hover:text-amber-600",
-          badgeBg: "bg-amber-50 text-amber-800 border-amber-200",
-          snippetBg: "bg-amber-950/5 text-amber-900 border-amber-100"
+          badgeBg: "bg-amber-50 text-amber-800 border-amber-200"
         };
-      case "teal":
+      case "data-collection":
         return {
           iconBg: "bg-teal-50 border-teal-200/80",
           hoverBorder: "hover:border-teal-300",
           textHover: "group-hover:text-teal-600",
-          badgeBg: "bg-teal-50 text-teal-800 border-teal-200",
-          snippetBg: "bg-teal-950/5 text-teal-900 border-teal-100"
+          badgeBg: "bg-teal-50 text-teal-800 border-teal-200"
         };
-      case "rose":
+      case "video-service":
+      default:
         return {
           iconBg: "bg-rose-50 border-rose-200/80",
           hoverBorder: "hover:border-rose-300",
           textHover: "group-hover:text-rose-600",
-          badgeBg: "bg-rose-50 text-rose-800 border-rose-200",
-          snippetBg: "bg-rose-950/5 text-rose-900 border-rose-100"
+          badgeBg: "bg-rose-50 text-rose-800 border-rose-200"
         };
     }
   };
@@ -146,9 +71,9 @@ export const ServicesOverview: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
         <FadeInView direction="up" className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <SectionHeading
-            kicker="Our Core Specializations"
-            title="Translate, ASR, TTS, Data Collection & Video Service"
-            description="Focused technological capabilities uniting qualified human discernment with scalable data and media engineering."
+            kicker={t.servicesOverview.kicker}
+            title={t.servicesOverview.title}
+            description={t.servicesOverview.description}
           />
           <motion.button
             whileHover={{ x: 3 }}
@@ -156,15 +81,16 @@ export const ServicesOverview: React.FC = () => {
             onClick={() => navigate("/services")}
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors whitespace-nowrap self-start md:self-auto cursor-pointer"
           >
-            <span>View All Service Scopes</span>
+            <span>{t.servicesOverview.viewAllBtn}</span>
             <ArrowRight className="w-4 h-4" aria-hidden="true" />
           </motion.button>
         </FadeInView>
 
         {/* Dynamic Grid of 5 Services */}
         <StaggerContainer staggerDelay={0.09} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {servicesList.map((svc, index) => {
-            const theme = getThemeClasses(svc.themeColor);
+          {t.servicesOverview.services.map((svc, index) => {
+            const theme = getThemeClasses(svc.id);
+            const icon = serviceIcons[svc.id as keyof typeof serviceIcons] || serviceIcons.translate;
 
             return (
               <StaggerItem
@@ -186,7 +112,7 @@ export const ServicesOverview: React.FC = () => {
                         transition={{ duration: 0.15 }}
                         className={`w-12 h-12 rounded-xl ${theme.iconBg} border flex items-center justify-center shadow-2xs`}
                       >
-                        {svc.icon}
+                        {icon}
                       </motion.div>
                       
                       {/* Domain Telemetry Snippet */}
@@ -227,10 +153,10 @@ export const ServicesOverview: React.FC = () => {
                       whileHover={{ x: 4 }}
                       whileTap={{ scale: 0.98 }}
                       transition={{ duration: 0.15 }}
-                      onClick={() => navigate(`/services?item=${svc.anchor}`)}
+                      onClick={() => navigate(`/services?item=${svc.id}`)}
                       className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-900 group-hover:text-blue-600 transition-colors cursor-pointer"
                     >
-                      <span>Scope details</span>
+                      <span>{t.servicesOverview.scopeDetailsBtn}</span>
                       <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                     </motion.button>
                   </div>
@@ -243,3 +169,5 @@ export const ServicesOverview: React.FC = () => {
     </section>
   );
 };
+
+export default ServicesOverview;

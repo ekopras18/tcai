@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigation } from "../context/NavigationContext";
+import { useLanguage } from "../context/LanguageContext";
 import { Breadcrumbs } from "../components/ui/Breadcrumbs";
 import { INDUSTRIES_DATA, IndustryItem } from "../data/industries";
 import { CTASection } from "../components/sections/CTASection";
@@ -20,6 +21,8 @@ import {
 
 export const IndustriesPage: React.FC = () => {
   const { activeParam, navigate } = useNavigation();
+  const { language, t } = useLanguage();
+  const isThai = language === "th";
   const [selectedIndustry, setSelectedIndustry] = useState<string>("ai-ml");
 
   useEffect(() => {
@@ -59,16 +62,16 @@ export const IndustriesPage: React.FC = () => {
       {/* Page Header */}
       <section className="bg-slate-900 text-white pt-10 pb-16 lg:pt-14 lg:pb-20 border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <Breadcrumbs currentPage="Industries" />
+          <Breadcrumbs currentPage={t.pages.industriesPage.breadcrumbs} />
           <FadeInView direction="up" className="max-w-3xl space-y-4 pt-2">
             <p className="text-xs font-semibold tracking-wider uppercase text-cyan-400">
-              Sector Alignment & Use Cases
+              {isThai ? "การประยุกต์ใช้ตามกลุ่มอุตสาหกรรม" : "Sector Alignment & Use Cases"}
             </p>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight text-balance">
-              Industries We Support
+              {t.pages.industriesPage.title}
             </h1>
             <p className="text-base sm:text-lg text-slate-300 leading-relaxed text-pretty">
-              Addressing operational challenges across AI development, international software deployment, broadcast media, and multi-market communications.
+              {t.pages.industriesPage.subtitle}
             </p>
           </FadeInView>
         </div>

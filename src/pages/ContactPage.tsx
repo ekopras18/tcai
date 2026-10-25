@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigation } from "../context/NavigationContext";
+import { useLanguage } from "../context/LanguageContext";
 import { Breadcrumbs } from "../components/ui/Breadcrumbs";
 import { COMPANY_INFO } from "../data/company";
 import { SERVICES_DATA } from "../data/services";
@@ -34,6 +35,8 @@ interface FormErrors {
 
 export const ContactPage: React.FC = () => {
   const { activeParam } = useNavigation();
+  const { language, t } = useLanguage();
+  const isThai = language === "th";
 
   const [formData, setFormData] = useState<FormState>({
     fullName: "",
@@ -61,28 +64,28 @@ export const ContactPage: React.FC = () => {
   const validate = (): boolean => {
     const newErrors: FormErrors = {};
     if (!formData.fullName.trim()) {
-      newErrors.fullName = "Please provide your full name.";
+      newErrors.fullName = isThai ? "กรุณากรอกชื่อ - นามสกุล" : "Please provide your full name.";
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email.trim()) {
-      newErrors.email = "Please provide your business email.";
+      newErrors.email = isThai ? "กรุณากรอกอีเมลสำหรับงาน" : "Please provide your business email.";
     } else if (!emailRegex.test(formData.email.trim())) {
-      newErrors.email = "Please enter a valid email address.";
+      newErrors.email = isThai ? "กรุณากรอกที่อยู่อีเมลที่ถูกต้อง" : "Please enter a valid email address.";
     }
 
     if (!formData.company.trim()) {
-      newErrors.company = "Please provide your organization or company name.";
+      newErrors.company = isThai ? "กรุณาระบุชื่อบริษัทหรือองค์กร" : "Please provide your organization or company name.";
     }
 
     if (!formData.serviceInterest) {
-      newErrors.serviceInterest = "Please select a service interest.";
+      newErrors.serviceInterest = isThai ? "กรุณาเลือกบริการที่สนใจ" : "Please select a service interest.";
     }
 
     if (!formData.projectDetails.trim()) {
-      newErrors.projectDetails = "Please describe your project requirements or objectives.";
+      newErrors.projectDetails = isThai ? "กรุณากรอกรายละเอียดโครงการ" : "Please describe your project requirements or objectives.";
     } else if (formData.projectDetails.trim().length < 15) {
-      newErrors.projectDetails = "Please provide at least 15 characters describing your requirements.";
+      newErrors.projectDetails = isThai ? "กรุณากรอกข้อมูลอย่างน้อย 15 ตัวอักษร" : "Please provide at least 15 characters describing your requirements.";
     }
 
     setErrors(newErrors);
@@ -144,16 +147,16 @@ ${formData.fullName}`;
       {/* Header */}
       <section className="bg-slate-900 text-white pt-10 pb-16 lg:pt-14 lg:pb-20 border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <Breadcrumbs currentPage="Contact Us" />
+          <Breadcrumbs currentPage={t.pages.contact.breadcrumbs} />
           <FadeInView direction="up" className="max-w-3xl space-y-4 pt-2">
             <p className="text-xs font-semibold tracking-wider uppercase text-cyan-400">
-              Project Consultation
+              {isThai ? "การปรึกษาโครงการ" : "Project Consultation"}
             </p>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight text-balance">
-              Let&apos;s Talk About Your Project
+              {t.pages.contact.title}
             </h1>
             <p className="text-base sm:text-lg text-slate-300 leading-relaxed text-pretty">
-              Submit your project specifications or dataset requirements. Our coordination team analyzes inquiries and responds within 1–2 business days.
+              {t.pages.contact.subtitle}
             </p>
           </FadeInView>
         </div>
@@ -168,10 +171,12 @@ ${formData.fullName}`;
             <FadeInView direction="up" className="lg:col-span-5 space-y-8">
               <div className="space-y-4">
                 <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
-                  Direct Inquiries & Intake
+                  {isThai ? "ช่องทางติดต่อและรับเรื่องโดยตรง" : "Direct Inquiries & Intake"}
                 </h2>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  We engage with product teams, machine learning leads, localization directors, and creative producers worldwide.
+                  {isThai
+                    ? "เราร่วมงานกับทีมพัฒนาผลิตภัณฑ์ ผู้นำฝ่าย Machine Learning ผู้อำนวยการด้านการปรับภาษา และโปรดิวเซอร์สื่อทั่วโลก"
+                    : "We engage with product teams, machine learning leads, localization directors, and creative producers worldwide."}
                 </p>
               </div>
 
@@ -179,7 +184,7 @@ ${formData.fullName}`;
               <div className="p-6 rounded-xl bg-slate-50 border border-slate-200 space-y-6">
                 <div className="space-y-2">
                   <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                    Official Project Email
+                    {isThai ? "อีเมลทางการสำหรับโครงการ" : "Official Project Email"}
                   </span>
                   <div className="flex items-center gap-2">
                     <Mail className="w-5 h-5 text-blue-600 shrink-0" aria-hidden="true" />
@@ -196,7 +201,7 @@ ${formData.fullName}`;
 
                 <div className="space-y-2 pt-4 border-t border-slate-200/80">
                   <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                    Collaborator & Talent Desk
+                    {isThai ? "โต๊ะรับสมัครผู้ร่วมงานและผู้เชี่ยวชาญ" : "Collaborator & Talent Desk"}
                   </span>
                   <div className="flex items-center gap-2">
                     <Mail className="w-5 h-5 text-cyan-600 shrink-0" aria-hidden="true" />
@@ -214,20 +219,24 @@ ${formData.fullName}`;
                 <div className="space-y-2 pt-4 border-t border-slate-200/80 text-xs text-slate-600">
                   <div className="flex items-center gap-2 font-semibold text-slate-900">
                     <Clock className="w-4 h-4 text-blue-600 shrink-0" aria-hidden="true" />
-                    <span>Response Timeframe</span>
+                    <span>{isThai ? "ระยะเวลาการตอบกลับ" : "Response Timeframe"}</span>
                   </div>
                   <p>
-                    All project briefs and RFPs are acknowledged within 24 to 48 hours on standard business days.
+                    {isThai
+                      ? "ข้อเสนอโครงการและ RFP ทั้งหมดจะได้รับการตอบรับภายใน 24 ถึง 48 ชั่วโมงในวันทำการปกติ"
+                      : "All project briefs and RFPs are acknowledged within 24 to 48 hours on standard business days."}
                   </p>
                 </div>
 
                 <div className="space-y-2 pt-4 border-t border-slate-200/80 text-xs text-slate-600">
                   <div className="flex items-center gap-2 font-semibold text-slate-900">
                     <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" aria-hidden="true" />
-                    <span>Confidentiality & Non-Disclosure</span>
+                    <span>{isThai ? "การรักษาความลับ NDA" : "Confidentiality & Non-Disclosure"}</span>
                   </div>
                   <p>
-                    We readily execute mutual NDAs prior to reviewing proprietary datasets, source code, or pre-release media assets.
+                    {isThai
+                      ? "เราพร้อมลงนามข้อตกลงไม่เปิดเผยข้อมูล (NDA) ก่อนการตรวจสอบชุดข้อมูล กรรมสิทธิ์ซอร์สโค้ด หรือไฟล์สื่อของท่าน"
+                      : "We readily execute mutual NDAs prior to reviewing proprietary datasets, source code, or pre-release media assets."}
                   </p>
                 </div>
               </div>
@@ -236,7 +245,10 @@ ${formData.fullName}`;
               <div className="p-4 rounded-lg bg-blue-50/70 border border-blue-100 flex items-start gap-3">
                 <HelpCircle className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" aria-hidden="true" />
                 <div className="text-xs text-slate-700 leading-relaxed">
-                  <strong>Notice:</strong> This website operates strictly as a static client-side application without a remote database. Completing this form validates your inputs and compiles a structured email draft in your local mail client.
+                  <strong>{isThai ? "ข้อสังเกต:" : "Notice:"}</strong>{" "}
+                  {isThai
+                    ? "เว็บไซต์นี้ทำงานแบบ Client-side สถิตโดยไม่มีฐานข้อมูลระยะไกล การกรอกฟอร์มนี้จะตรวจสอบความถูกต้องและสร้างร่างอีเมลในโปรแกรมอีเมลของคุณโดยอัตโนมัติ"
+                    : "This website operates strictly as a static client-side application without a remote database. Completing this form validates your inputs and compiles a structured email draft in your local mail client."}
                 </div>
               </div>
             </FadeInView>
@@ -245,10 +257,10 @@ ${formData.fullName}`;
             <FadeInView delay={0.1} direction="up" className="lg:col-span-7 bg-white p-8 sm:p-10 rounded-2xl border border-slate-200 shadow-xs space-y-6">
               <div>
                 <h3 className="text-xl font-bold text-slate-900 tracking-tight">
-                  Project Inquiry Form
+                  {isThai ? "แบบฟอร์มปรึกษาโครงการ" : "Project Inquiry Form"}
                 </h3>
                 <p className="text-xs text-slate-500 mt-1">
-                  Fill in your project requirements to generate an inquiry draft.
+                  {isThai ? "กรอกข้อมูลความต้องการเพื่อสร้างร่างข้อความสอบถาม" : "Fill in your project requirements to generate an inquiry draft."}
                 </p>
               </div>
 
@@ -256,14 +268,14 @@ ${formData.fullName}`;
                 {/* Full Name */}
                 <div className="space-y-1.5">
                   <label htmlFor="fullName" className="block text-xs font-semibold text-slate-900 uppercase tracking-wider">
-                    Full Name <span className="text-red-500">*</span>
+                    {t.pages.contact.formName} <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
                     id="fullName"
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                    placeholder="e.g. Sarah Jenkins"
+                    placeholder={isThai ? "เช่น สมชาย มั่นคง" : "e.g. Sarah Jenkins"}
                     className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 transition-colors ${
                       errors.fullName
                         ? "border-red-400 focus:ring-red-300 bg-red-50/20"
@@ -282,7 +294,7 @@ ${formData.fullName}`;
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-1.5">
                     <label htmlFor="email" className="block text-xs font-semibold text-slate-900 uppercase tracking-wider">
-                      Business Email <span className="text-red-500">*</span>
+                      {t.pages.contact.formEmail} <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="email"
@@ -306,14 +318,14 @@ ${formData.fullName}`;
 
                   <div className="space-y-1.5">
                     <label htmlFor="company" className="block text-xs font-semibold text-slate-900 uppercase tracking-wider">
-                      Company / Organization <span className="text-red-500">*</span>
+                      {t.pages.contact.formOrg} <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
                       id="company"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      placeholder="Acme Technologies"
+                      placeholder={isThai ? "เช่น สยาม อินโนเวชัน จำกัด" : "Acme Technologies"}
                       className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 transition-colors ${
                         errors.company
                           ? "border-red-400 focus:ring-red-300 bg-red-50/20"
@@ -332,7 +344,7 @@ ${formData.fullName}`;
                 {/* Service Interest */}
                 <div className="space-y-1.5">
                   <label htmlFor="serviceInterest" className="block text-xs font-semibold text-slate-900 uppercase tracking-wider">
-                    Service Interest <span className="text-red-500">*</span>
+                    {t.pages.contact.formService} <span className="text-red-500">*</span>
                   </label>
                   <select
                     id="serviceInterest"
@@ -340,26 +352,42 @@ ${formData.fullName}`;
                     onChange={(e) => setFormData({ ...formData, serviceInterest: e.target.value })}
                     className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-colors"
                   >
-                    <option value="Translate">Translate (Language & Localization)</option>
-                    <option value="ASR (Automatic Speech Recognition)">ASR (Automatic Speech Recognition)</option>
-                    <option value="TTS (Text-to-Speech)">TTS (Text-to-Speech & Evaluation)</option>
-                    <option value="Data Collection">Data Collection (AI Data Solutions)</option>
-                    <option value="Video Service">Video Service (Media Production)</option>
-                    <option value="Comprehensive / Multi-Service Project">Comprehensive / Multi-Service Project</option>
+                    <option value="Translate">
+                      {isThai ? "แปลภาษา (Translate)" : "Translate (Language & Localization)"}
+                    </option>
+                    <option value="ASR (Automatic Speech Recognition)">
+                      {isThai ? "รู้จำเสียงพูด ASR (Automatic Speech Recognition)" : "ASR (Automatic Speech Recognition)"}
+                    </option>
+                    <option value="TTS (Text-to-Speech)">
+                      {isThai ? "สังเคราะห์เสียงพูด TTS (Text-to-Speech & Evaluation)" : "TTS (Text-to-Speech & Evaluation)"}
+                    </option>
+                    <option value="Data Collection">
+                      {isThai ? "เก็บรวบรวมชุดข้อมูล AI (Data Collection)" : "Data Collection (AI Data Solutions)"}
+                    </option>
+                    <option value="Video Service">
+                      {isThai ? "บริการงานวิดีโอ (Video Service)" : "Video Service (Media Production)"}
+                    </option>
+                    <option value="Comprehensive / Multi-Service Project">
+                      {isThai ? "โครงการครบวงจรหลายบริการ (Multi-Service Project)" : "Comprehensive / Multi-Service Project"}
+                    </option>
                   </select>
                 </div>
 
                 {/* Project Details */}
                 <div className="space-y-1.5">
                   <label htmlFor="projectDetails" className="block text-xs font-semibold text-slate-900 uppercase tracking-wider">
-                    Project Details & Scope <span className="text-red-500">*</span>
+                    {t.pages.contact.formMessage} <span className="text-red-500">*</span>
                   </label>
                   <textarea
                     id="projectDetails"
                     rows={5}
                     value={formData.projectDetails}
                     onChange={(e) => setFormData({ ...formData, projectDetails: e.target.value })}
-                    placeholder="Briefly describe your objectives, target languages or data schemas, estimated volumes, and expected delivery timeline..."
+                    placeholder={
+                      isThai
+                        ? "อธิบายเป้าหมายโครงการ ภาษาเป้าหมาย ปริมาณโดยประมาณ และกรอบเวลาที่คาดหวัง..."
+                        : "Briefly describe your objectives, target languages or data schemas, estimated volumes, and expected delivery timeline..."
+                    }
                     className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 transition-colors ${
                       errors.projectDetails
                         ? "border-red-400 focus:ring-red-300 bg-red-50/20"
@@ -383,7 +411,7 @@ ${formData.fullName}`;
                     className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-slate-900 rounded-lg hover:bg-slate-800 transition-colors shadow-xs cursor-pointer"
                   >
                     <Send className="w-4 h-4" />
-                    <span>Generate Email Draft & Launch Mail Client</span>
+                    <span>{t.pages.contact.formSubmit}</span>
                   </motion.button>
                 </div>
               </form>
@@ -401,7 +429,7 @@ ${formData.fullName}`;
                     <div className="flex items-center justify-between">
                       <p className="text-xs font-bold uppercase tracking-wider text-emerald-700 flex items-center gap-1.5">
                         <CheckCheck className="w-4 h-4 text-emerald-600" />
-                        <span>Validated Draft Prepared</span>
+                        <span>{isThai ? "ร่างอีเมลได้รับการตรวจสอบแล้ว" : "Validated Draft Prepared"}</span>
                       </p>
                       <motion.button
                         type="button"
@@ -414,12 +442,12 @@ ${formData.fullName}`;
                         {copied ? (
                           <>
                             <CheckCheck className="w-3.5 h-3.5 text-emerald-600" />
-                            <span>Copied to Clipboard!</span>
+                            <span>{isThai ? "คัดลอกลงคลิปบอร์ดแล้ว!" : "Copied to Clipboard!"}</span>
                           </>
                         ) : (
                           <>
                             <Copy className="w-3.5 h-3.5" />
-                            <span>Copy Message</span>
+                            <span>{isThai ? "คัดลอกข้อความ" : "Copy Message"}</span>
                           </>
                         )}
                       </motion.button>
@@ -438,7 +466,7 @@ ${formData.fullName}`;
                         className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors shadow-xs cursor-pointer"
                       >
                         <Mail className="w-4 h-4" />
-                        <span>Re-open in Mail App</span>
+                        <span>{isThai ? "เปิดใหม่ในแอปอีเมล" : "Re-open in Mail App"}</span>
                       </motion.a>
                     </div>
                   </motion.div>

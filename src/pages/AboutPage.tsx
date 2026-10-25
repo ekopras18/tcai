@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext";
 import { Breadcrumbs } from "../components/ui/Breadcrumbs";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { COMPANY_INFO } from "../data/company";
@@ -17,21 +18,24 @@ import {
 } from "lucide-react";
 
 export const AboutPage: React.FC = () => {
+  const { language, t } = useLanguage();
+  const isThai = language === "th";
+
   return (
     <div className="bg-white">
       {/* Page Header */}
       <section className="bg-slate-900 text-white pt-10 pb-16 lg:pt-14 lg:pb-20 border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <Breadcrumbs currentPage="About Us" />
+          <Breadcrumbs currentPage={t.pages.about.breadcrumbs} />
           <FadeInView direction="up" className="max-w-3xl space-y-4 pt-2">
             <p className="text-xs font-semibold tracking-wider uppercase text-cyan-400">
-              Identity & Operational Approach
+              {isThai ? "อัตลักษณ์และแนวทางการดำเนินงาน" : "Identity & Operational Approach"}
             </p>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight text-balance">
-              Connecting Human Expertise with Technology
+              {t.pages.about.title}
             </h1>
             <p className="text-base sm:text-lg text-slate-300 leading-relaxed text-pretty">
-              {COMPANY_INFO.heroSubheadline}
+              {t.pages.about.subtitle}
             </p>
           </FadeInView>
         </div>
@@ -43,17 +47,25 @@ export const AboutPage: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <FadeInView direction="up" className="lg:col-span-5 space-y-4">
               <SectionHeading
-                kicker="Company Profile"
-                title="About TCAI Information Technology"
-                description="A specialized provider of high-fidelity data, linguistic solutions, and digital creative pipelines."
+                kicker={isThai ? "ข้อมูลองค์กร" : "Company Profile"}
+                title={isThai ? "เกี่ยวกับ TCAI Information Technology" : "About TCAI Information Technology"}
+                description={
+                  isThai
+                    ? "ผู้ให้บริการเฉพาะทางด้านชุดข้อมูลความเที่ยงตรงสูง โซลูชันภาษาศาสตร์ และไปป์ไลน์งานสร้างสรรค์สื่อดิจิทัล"
+                    : "A specialized provider of high-fidelity data, linguistic solutions, and digital creative pipelines."
+                }
               />
             </FadeInView>
             <FadeInView delay={0.1} direction="up" className="lg:col-span-7 space-y-6 text-base text-slate-600 leading-relaxed">
               <p>
-                <strong>{COMPANY_INFO.legalEntity}</strong> was established to bridge the gap between automated digital systems and the nuanced precision required for high-stakes enterprise applications. As artificial intelligence models and digital media platforms evolve, raw computation alone cannot replicate the cultural accuracy of native linguists, the critical discernment of acoustic specialists, or the visual craftsmanship of seasoned video editors.
+                <strong>{COMPANY_INFO.legalEntity}</strong> {isThai
+                  ? "ก่อตั้งขึ้นเพื่อเชื่อมช่องว่างระหว่างระบบดิจิทัลอัตโนมัติกับความละเอียดอ่อนที่แอปพลิเคชันระดับองค์กรต้องการ เมื่อโมเดลปัญญาประดิษฐ์และแพลตฟอร์มสื่อดิจิทัลพัฒนาขึ้น การคำนวณดิบเพียงอย่างเดียวไม่สามารถทดแทนความเข้าใจทางวัฒนธรรมของนักภาษาศาสตร์เจ้าของภาษา การตรวจสอบของวิศวกรเสียง หรือทักษะการตัดต่อของช่างภาพวิดีโอที่มีประสบการณ์ได้"
+                  : "was established to bridge the gap between automated digital systems and the nuanced precision required for high-stakes enterprise applications. As artificial intelligence models and digital media platforms evolve, raw computation alone cannot replicate the cultural accuracy of native linguists, the critical discernment of acoustic specialists, or the visual craftsmanship of seasoned video editors."}
               </p>
               <p>
-                Our organization brings together domain-tested specialists across Translate (language and localization), ASR (automatic speech recognition), TTS (text-to-speech evaluation), Data Collection (AI data pipelines), and Video Service (digital media production). We structure workflows that scale smoothly with client requirements, providing the operational rigor required to train production AI models, adapt software for international markets, and deliver broadcast-quality media.
+                {isThai
+                  ? "องค์กรของเรารวบรวมผู้เชี่ยวชาญใน 5 สาขาหลัก ได้แก่ แปลภาษา (Translate), รู้จำเสียงพูด (ASR), สังเคราะห์เสียงพูด (TTS), จัดเตรียมข้อมูล AI (Data Collection) และบริการงานวิดีโอ (Video Service) เราสร้างขั้นตอนการทำงานที่ขยายตัวได้อย่างราบรื่นตามความต้องการของลูกค้า เพื่อให้ได้มาตรฐานที่จำเป็นสำหรับการฝึกสอนโมเดล AI การปรับซอฟต์แวร์สู่ตลาดสากล และการส่งมอบสื่อคุณภาพมาตรฐานบรอดคาสต์"
+                  : "Our organization brings together domain-tested specialists across Translate (language and localization), ASR (automatic speech recognition), TTS (text-to-speech evaluation), Data Collection (AI data pipelines), and Video Service (digital media production). We structure workflows that scale smoothly with client requirements, providing the operational rigor required to train production AI models, adapt software for international markets, and deliver broadcast-quality media."}
               </p>
               <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <motion.div
@@ -62,10 +74,12 @@ export const AboutPage: React.FC = () => {
                 >
                   <div className="flex items-center gap-2 font-bold text-slate-900 text-sm mb-1">
                     <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" />
-                    <span>Rigorous Data Hygiene</span>
+                    <span>{isThai ? "ความปลอดภัยของข้อมูลสูงสุด" : "Rigorous Data Hygiene"}</span>
                   </div>
                   <p className="text-xs text-slate-500">
-                    Proprietary datasets and client IP handled under strict confidentiality.
+                    {isThai
+                      ? "ชุดข้อมูลกรรมสิทธิ์และทรัพย์สินทางปัญญาของลูกค้าอยู่ภายใต้สัญญา NDA เข้มงวด"
+                      : "Proprietary datasets and client IP handled under strict confidentiality."}
                   </p>
                 </motion.div>
                 <motion.div
@@ -74,10 +88,12 @@ export const AboutPage: React.FC = () => {
                 >
                   <div className="flex items-center gap-2 font-bold text-slate-900 text-sm mb-1">
                     <Users2 className="w-4 h-4 text-blue-600 shrink-0" />
-                    <span>Human-in-the-Loop</span>
+                    <span>{isThai ? "มนุษย์ตรวจสอบในทุกขั้นตอน" : "Human-in-the-Loop"}</span>
                   </div>
                   <p className="text-xs text-slate-500">
-                    Subject matter specialists validating nuanced domain terminology.
+                    {isThai
+                      ? "ผู้เชี่ยวชาญเฉพาะด้านตรวจสอบความหมายและคำศัพท์เชิงลึกทุกมิติ"
+                      : "Subject matter specialists validating nuanced domain terminology."}
                   </p>
                 </motion.div>
               </div>
@@ -92,9 +108,9 @@ export const AboutPage: React.FC = () => {
           <FadeInView direction="up">
             <SectionHeading
               centered
-              kicker="Purpose & Direction"
-              title="Mission & Vision"
-              description="Guiding our operational principles and service delivery frameworks."
+              kicker={isThai ? "เป้าหมายและทิศทาง" : "Purpose & Direction"}
+              title={isThai ? "พันธกิจและวิสัยทัศน์" : "Mission & Vision"}
+              description={isThai ? "หลักการดำเนินงานและกรอบการส่งมอบบริการของเรา" : "Guiding our operational principles and service delivery frameworks."}
             />
           </FadeInView>
 
@@ -110,10 +126,12 @@ export const AboutPage: React.FC = () => {
                   <Target className="w-5 h-5" aria-hidden="true" />
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 tracking-tight">
-                  Our Mission
+                  {t.pages.about.missionTitle}
                 </h3>
                 <p className="text-base text-slate-600 leading-relaxed">
-                  &ldquo;{COMPANY_INFO.mission}&rdquo;
+                  &ldquo;{isThai
+                    ? "เพื่อเสริมพลังให้แก่องค์กรทั่วโลกผ่านโซลูชัน Translate, ASR, TTS, Data Collection และ Video Service ที่เชื่อถือได้ โดยขับเคลื่อนด้วยความแม่นยำของมนุษย์และวิศวกรรมคุณภาพที่เข้มงวด"
+                    : COMPANY_INFO.mission}&rdquo;
                 </p>
               </motion.div>
             </StaggerItem>
@@ -129,10 +147,12 @@ export const AboutPage: React.FC = () => {
                   <Compass className="w-5 h-5" aria-hidden="true" />
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 tracking-tight">
-                  Our Vision
+                  {t.pages.about.visionTitle}
                 </h3>
                 <p className="text-base text-slate-600 leading-relaxed">
-                  &ldquo;{COMPANY_INFO.vision}&rdquo;
+                  &ldquo;{isThai
+                    ? "เพื่อก้าวสู่การเป็นพันธมิตรบริการเทคโนโลยีที่ได้รับความไว้วางใจ เชื่อมโยงความเชี่ยวชาญของมนุษย์ คุณภาพข้อมูลที่พิสูจน์ได้ และนวัตกรรมดิจิทัลเข้าด้วยกัน"
+                    : COMPANY_INFO.vision}&rdquo;
                 </p>
               </motion.div>
             </StaggerItem>
@@ -146,9 +166,13 @@ export const AboutPage: React.FC = () => {
           <FadeInView direction="up">
             <SectionHeading
               centered
-              kicker="Organizational Standards"
-              title="Core Values"
-              description="The bedrock principles that govern every client collaboration and internal project phase."
+              kicker={isThai ? "มาตรฐานขององค์กร" : "Organizational Standards"}
+              title={t.pages.about.coreValuesTitle}
+              description={
+                isThai
+                  ? "หลักการพื้นฐานที่ชี้นำความร่วมมือกับลูกค้าทุกโครงการและขั้นตอนภายในองค์กร"
+                  : "The bedrock principles that govern every client collaboration and internal project phase."
+              }
             />
           </FadeInView>
 
@@ -183,9 +207,13 @@ export const AboutPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <FadeInView direction="up">
             <SectionHeading
-              kicker="Operational Rigor"
-              title="Our Delivery Approach"
-              description="How we maintain consistent quality across varied data schemas, language pairs, and media formats."
+              kicker={isThai ? "ระเบียบปฏิบัติงาน" : "Operational Rigor"}
+              title={isThai ? "แนวทางการส่งมอบงานของเรา" : "Our Delivery Approach"}
+              description={
+                isThai
+                  ? "วิธีที่เรารักษาคุณภาพให้สม่ำเสมอในทุกสกีมาข้อมูล คู่ภาษา และรูปแบบสื่อ"
+                  : "How we maintain consistent quality across varied data schemas, language pairs, and media formats."
+              }
             />
           </FadeInView>
 
@@ -200,10 +228,12 @@ export const AboutPage: React.FC = () => {
                   <CheckCircle className="w-5 h-5" />
                 </div>
                 <h3 className="text-base font-bold text-slate-900">
-                  Human-in-the-Loop Foundation
+                  {isThai ? "รากฐาน Human-in-the-Loop" : "Human-in-the-Loop Foundation"}
                 </h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  Automated tools provide initial efficiency, but every deliverable undergoes human review by qualified native linguists, audio engineers, or annotation reviewers.
+                  {isThai
+                    ? "แม้ระบบอัตโนมัติจะช่วยเพิ่มประสิทธิภาพ แต่ผลงานทุกชิ้นต้องผ่านการตรวจสอบโดยนักภาษาศาสตร์ วิศวกรเสียง หรือผู้ตรวจกำกับข้อมูลที่เป็นมนุษย์เสมอ"
+                    : "Automated tools provide initial efficiency, but every deliverable undergoes human review by qualified native linguists, audio engineers, or annotation reviewers."}
                 </p>
               </motion.div>
             </StaggerItem>
@@ -218,10 +248,12 @@ export const AboutPage: React.FC = () => {
                   <RefreshCw className="w-5 h-5" />
                 </div>
                 <h3 className="text-base font-bold text-slate-900">
-                  Iterative Calibration Loops
+                  {isThai ? "การปรับเทียบแบบวนซ้ำ (Calibration Loops)" : "Iterative Calibration Loops"}
                 </h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  Prior to full-scale production, we conduct pilot verification batches to calibrate guidelines, resolve borderline edge cases, and align with client benchmarks.
+                  {isThai
+                    ? "ก่อนการผลิตเต็มรูปแบบ เราทำการทดสอบชุดนำร่องเพื่อปรับเทียบแนวทาง แก้ปัญหาเคสเฉพาะทาง และปรับให้ตรงกับเกณฑ์มาตรฐานของลูกค้าอย่างแม่นยำ"
+                    : "Prior to full-scale production, we conduct pilot verification batches to calibrate guidelines, resolve borderline edge cases, and align with client benchmarks."}
                 </p>
               </motion.div>
             </StaggerItem>
@@ -236,10 +268,12 @@ export const AboutPage: React.FC = () => {
                   <Lock className="w-5 h-5" />
                 </div>
                 <h3 className="text-base font-bold text-slate-900">
-                  Confidentiality & Compliance
+                  {isThai ? "การรักษาความลับและการปฏิบัติตามกฎเกณฑ์" : "Confidentiality & Compliance"}
                 </h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  All specialists work under non-disclosure protocols with role-segregated access to source files, preserving the security of pre-release intellectual property.
+                  {isThai
+                    ? "ผู้เชี่ยวชาญทุกคนทำงานภายใต้สัญญาไม่เปิดเผยข้อมูล (NDA) พร้อมระบบสิทธิ์เข้าถึงไฟล์ตามบทบาท เพื่อรักษาความปลอดภัยของทรัพย์สินทางปัญญา"
+                    : "All specialists work under non-disclosure protocols with role-segregated access to source files, preserving the security of pre-release intellectual property."}
                 </p>
               </motion.div>
             </StaggerItem>

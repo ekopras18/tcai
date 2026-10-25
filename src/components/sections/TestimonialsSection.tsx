@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigation } from "../../context/NavigationContext";
+import { useLanguage } from "../../context/LanguageContext";
 import {
   ChevronLeft,
   ChevronRight,
@@ -24,6 +25,7 @@ import { TESTIMONIALS_DATA, TestimonialItem } from "../../data/testimonials";
 
 export const TestimonialsSection: React.FC = () => {
   const { navigate } = useNavigation();
+  const { language, t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState<number>(1);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -31,7 +33,22 @@ export const TestimonialsSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const total = TESTIMONIALS_DATA.length;
-  const currentItem: TestimonialItem = TESTIMONIALS_DATA[currentIndex];
+  const rawItem: TestimonialItem = TESTIMONIALS_DATA[currentIndex];
+
+  // Resolve language-specific fields
+  const isThai = language === "th";
+  const currentItem = {
+    ...rawItem,
+    serviceLabel: isThai && rawItem.th ? rawItem.th.serviceLabel : rawItem.serviceLabel,
+    partnerType: isThai && rawItem.th ? rawItem.th.partnerType : rawItem.partnerType,
+    clientIndustry: isThai && rawItem.th ? rawItem.th.clientIndustry : rawItem.clientIndustry,
+    quote: isThai && rawItem.th ? rawItem.th.quote : rawItem.quote,
+    challenge: isThai && rawItem.th ? rawItem.th.challenge : rawItem.challenge,
+    solution: isThai && rawItem.th ? rawItem.th.solution : rawItem.solution,
+    authorRole: isThai && rawItem.th ? rawItem.th.authorRole : rawItem.author.role,
+    keyMetric: isThai && rawItem.th ? rawItem.th.keyMetric : rawItem.keyMetric,
+    additionalMetrics: isThai && rawItem.th ? rawItem.th.additionalMetrics : rawItem.additionalMetrics
+  };
 
   const handleNext = useCallback(() => {
     setDirection(1);
@@ -93,51 +110,37 @@ export const TestimonialsSection: React.FC = () => {
         return {
           metricText: "text-violet-600",
           metricBg: "bg-violet-50/70 border-violet-200/80",
-          accentBorder: "border-l-violet-500",
-          badgeDot: "bg-violet-500",
-          activeTab: "bg-violet-600 text-white shadow-sm",
-          statRing: "ring-violet-100"
+          activeTab: "bg-violet-600 text-white shadow-sm"
         };
       case "indigo":
         return {
           metricText: "text-indigo-600",
           metricBg: "bg-indigo-50/70 border-indigo-200/80",
-          accentBorder: "border-l-indigo-500",
-          badgeDot: "bg-indigo-500",
-          activeTab: "bg-indigo-600 text-white shadow-sm",
-          statRing: "ring-indigo-100"
+          activeTab: "bg-indigo-600 text-white shadow-sm"
         };
       case "amber":
         return {
           metricText: "text-amber-600",
           metricBg: "bg-amber-50/70 border-amber-200/80",
-          accentBorder: "border-l-amber-500",
-          badgeDot: "bg-amber-500",
-          activeTab: "bg-amber-600 text-white shadow-sm",
-          statRing: "ring-amber-100"
+          activeTab: "bg-amber-600 text-white shadow-sm"
         };
       case "teal":
         return {
           metricText: "text-teal-600",
           metricBg: "bg-teal-50/70 border-teal-200/80",
-          accentBorder: "border-l-teal-500",
-          badgeDot: "bg-teal-500",
-          activeTab: "bg-teal-600 text-white shadow-sm",
-          statRing: "ring-teal-100"
+          activeTab: "bg-teal-600 text-white shadow-sm"
         };
       case "rose":
+      default:
         return {
           metricText: "text-rose-600",
           metricBg: "bg-rose-50/70 border-rose-200/80",
-          accentBorder: "border-l-rose-500",
-          badgeDot: "bg-rose-500",
-          activeTab: "bg-rose-600 text-white shadow-sm",
-          statRing: "ring-rose-100"
+          activeTab: "bg-rose-600 text-white shadow-sm"
         };
     }
   };
 
-  const theme = getThemeAccents(currentItem.themeColor);
+  const theme = getThemeAccents(rawItem.themeColor);
 
   // Framer Motion slide variants
   const slideVariants = {
@@ -180,13 +183,13 @@ export const TestimonialsSection: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <FadeInView direction="up">
             <SectionHeading
-              kicker="Enterprise Testimonials & Case Results"
-              title="Validated Impact Across Speech, Language & AI Corpora"
-              description="Real engineering and localization outcomes achieved with partners in conversational AI, machine learning datasets, and cross-border multimedia."
+              kicker={t.testimonials.kicker}
+              title={t.testimonials.title}
+              description={t.testimonials.description}
             />
           </FadeInView>
 
-          {/* Carousel Controls (Top on Desktop, integrated) */}
+          {/* Carousel Controls */}
           <div className="flex items-center gap-2 self-start md:self-end">
             <button
               onClick={() => setIsPlaying(!isPlaying)}
@@ -214,14 +217,15 @@ export const TestimonialsSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Quick Discipline Selector Bar (Interactive Category Jump) */}
+        {/* Quick Discipline Selector Bar */}
         <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-slate-200/80">
           <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider pr-2 hidden sm:flex items-center gap-1.5 shrink-0">
             <SlidersHorizontal className="w-3.5 h-3.5 text-slate-400" />
-            <span>Select Focus:</span>
+            <span>{t.testimonials.selectFocus}</span>
           </div>
           {TESTIMONIALS_DATA.map((item, idx) => {
             const isSelected = idx === currentIndex;
+            const label = isThai && item.th ? item.th.serviceLabel.split(" ")[0] : item.serviceLabel.split(" ")[0];
             return (
               <button
                 key={item.id}
@@ -232,7 +236,7 @@ export const TestimonialsSection: React.FC = () => {
                     : "text-slate-600 hover:text-slate-900 hover:bg-slate-200/60"
                 }`}
               >
-                <span>{item.serviceLabel.split(" ")[0]}</span>
+                <span>{label}</span>
                 <span className="text-[10px] opacity-75">({item.clientOrganization.split(" ")[0]})</span>
               </button>
             );
@@ -247,7 +251,7 @@ export const TestimonialsSection: React.FC = () => {
         >
           <AnimatePresence custom={direction} mode="wait">
             <motion.div
-              key={currentItem.id}
+              key={`${currentItem.id}-${language}`}
               custom={direction}
               variants={slideVariants}
               initial="enter"
@@ -284,14 +288,14 @@ export const TestimonialsSection: React.FC = () => {
                     </blockquote>
                   </div>
 
-                  {/* Challenge & Solution Summary in clean typography */}
+                  {/* Challenge & Solution Summary */}
                   <div className="pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-600">
                     <p className="leading-relaxed">
-                      <span className="font-semibold text-slate-900">Partner Challenge: </span>
+                      <span className="font-semibold text-slate-900">{t.testimonials.partnerChallenge}: </span>
                       {currentItem.challenge}
                     </p>
                     <p className="leading-relaxed">
-                      <span className="font-semibold text-slate-900">TCAI Delivery: </span>
+                      <span className="font-semibold text-slate-900">{t.testimonials.tcaiDelivery}: </span>
                       {currentItem.solution}
                     </p>
                   </div>
@@ -312,7 +316,7 @@ export const TestimonialsSection: React.FC = () => {
                         {currentItem.author.name}
                       </h4>
                       <p className="text-xs text-slate-600 font-medium">
-                        {currentItem.author.role} —{" "}
+                        {currentItem.authorRole} —{" "}
                         <span className="text-slate-900 font-semibold">{currentItem.clientOrganization}</span>
                       </p>
                       <p className="text-[11px] text-slate-400 flex items-center gap-1 mt-0.5">
@@ -326,7 +330,7 @@ export const TestimonialsSection: React.FC = () => {
                     onClick={() => navigate("/services", currentItem.serviceId)}
                     className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors group/link cursor-pointer"
                   >
-                    <span>Explore {currentItem.serviceLabel.split(" ")[0]} Specs</span>
+                    <span>{t.testimonials.exploreSpecs}</span>
                     <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                   </button>
                 </div>
@@ -337,10 +341,10 @@ export const TestimonialsSection: React.FC = () => {
                 <div className="space-y-6">
                   <div className="flex items-center justify-between text-xs text-slate-500 pb-2 border-b border-slate-200">
                     <span className="font-mono uppercase tracking-wider text-[11px] font-semibold text-slate-500">
-                      Technical Metric Audit
+                      {t.testimonials.technicalMetricAudit}
                     </span>
                     <span className="text-[11px] font-mono text-emerald-600 flex items-center gap-1 font-medium">
-                      <CheckCircle2 className="w-3.5 h-3.5" /> Verified Outcome
+                      <CheckCircle2 className="w-3.5 h-3.5" /> {t.testimonials.verifiedOutcome}
                     </span>
                   </div>
 
@@ -360,7 +364,7 @@ export const TestimonialsSection: React.FC = () => {
                   {/* Supporting Engineering Benchmarks */}
                   <div className="space-y-2.5">
                     <h5 className="text-[11px] font-semibold text-slate-700 uppercase tracking-wider">
-                      Audit Parameters & Precision Data
+                      {t.testimonials.auditParameters}
                     </h5>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                       {currentItem.additionalMetrics.map((metric) => (
@@ -382,8 +386,8 @@ export const TestimonialsSection: React.FC = () => {
 
                 {/* Bottom Compliance & Provenance Note */}
                 <div className="pt-4 border-t border-slate-200/80 flex items-center justify-between text-[11px] text-slate-500">
-                  <span>ISO 17100 & Enterprise NDA Protected</span>
-                  <span className="font-mono text-[10px]">Case Ref: TCAI-{currentItem.id.slice(-3).toUpperCase()}</span>
+                  <span>{t.testimonials.complianceNote}</span>
+                  <span className="font-mono text-[10px]">TCAI-{currentItem.id.slice(-3).toUpperCase()}</span>
                 </div>
               </div>
             </motion.div>
@@ -395,7 +399,7 @@ export const TestimonialsSection: React.FC = () => {
           {/* Progress / Step indicator */}
           <div className="flex items-center gap-3">
             <span className="font-mono text-xs text-slate-500 font-medium">
-              Case {currentIndex + 1} of {total}
+              {t.testimonials.caseCountText} {currentIndex + 1} / {total}
             </span>
             <div className="flex items-center gap-1.5" role="tablist" aria-label="Testimonial slides">
               {TESTIMONIALS_DATA.map((item, idx) => (
@@ -415,14 +419,14 @@ export const TestimonialsSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Direct CTA link to Request Similar Solution */}
+          {/* Direct CTA link */}
           <div className="text-xs text-slate-500 flex items-center gap-2">
-            <span>Need similar benchmarks for your project?</span>
+            <span>{t.testimonials.ctaQuestion}</span>
             <button
               onClick={() => navigate("/contact")}
               className="font-semibold text-slate-900 hover:text-blue-600 underline underline-offset-4 transition-colors cursor-pointer"
             >
-              Discuss Your Pipeline
+              {t.testimonials.ctaAction}
             </button>
           </div>
         </div>

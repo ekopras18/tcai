@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useNavigation } from "../../context/NavigationContext";
+import { useLanguage } from "../../context/LanguageContext";
 import { INDUSTRIES_DATA } from "../../data/industries";
 import { SectionHeading } from "../ui/SectionHeading";
 import { FadeInView, StaggerContainer, StaggerItem } from "../ui/FadeInView";
@@ -8,6 +9,8 @@ import { ArrowRight, Cpu, Code2, Film, Megaphone, GraduationCap, Building2 } fro
 
 export const IndustriesSection: React.FC = () => {
   const { navigate } = useNavigation();
+  const { language, t } = useLanguage();
+  const isThai = language === "th";
 
   const getIndustryIcon = (id: string) => {
     switch (id) {
@@ -33,9 +36,9 @@ export const IndustriesSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         <FadeInView direction="up" className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <SectionHeading
-            kicker="Target Sectors"
-            title="Industries We Support"
-            description="Our service frameworks are tailored to meet the specific precision, velocity, and quality requirements of technology-driven domains."
+            kicker={t.industries.kicker}
+            title={t.industries.title}
+            description={t.industries.description}
           />
           <motion.button
             whileHover={{ x: 3 }}
@@ -43,7 +46,7 @@ export const IndustriesSection: React.FC = () => {
             onClick={() => navigate("/industries")}
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors whitespace-nowrap self-start md:self-auto cursor-pointer"
           >
-            <span>Explore Industry Applications</span>
+            <span>{t.industries.viewCaseStudies}</span>
             <ArrowRight className="w-4 h-4" aria-hidden="true" />
           </motion.button>
         </FadeInView>
@@ -82,14 +85,16 @@ export const IndustriesSection: React.FC = () => {
                 </div>
 
                 <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between text-xs">
-                  <span className="text-slate-500 font-medium">Common Scenarios</span>
+                  <span className="text-slate-500 font-medium">
+                    {isThai ? "สถานการณ์ที่พบบ่อย" : "Common Scenarios"}
+                  </span>
                   <motion.button
                     whileHover={{ x: 3 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => navigate(`/industries?item=${ind.id}`)}
                     className="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors inline-flex items-center gap-1 cursor-pointer"
                   >
-                    <span>Review profile</span>
+                    <span>{isThai ? "ดูรายละเอียด" : "Review profile"}</span>
                     <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                   </motion.button>
                 </div>
@@ -101,3 +106,5 @@ export const IndustriesSection: React.FC = () => {
     </section>
   );
 };
+
+export default IndustriesSection;

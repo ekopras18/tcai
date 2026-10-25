@@ -1,11 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { COMPANY_INFO } from "../../data/company";
+import { useLanguage } from "../../context/LanguageContext";
 import { SectionHeading } from "../ui/SectionHeading";
 import { FadeInView, StaggerContainer, StaggerItem } from "../ui/FadeInView";
 import { Sliders, CheckSquare2, Network, Target } from "lucide-react";
 
 export const WhyChoose: React.FC = () => {
+  const { t } = useLanguage();
+
   const icons = [
     <Sliders key="sliders" className="w-5 h-5 text-blue-600" aria-hidden="true" />,
     <CheckSquare2 key="check" className="w-5 h-5 text-blue-600" aria-hidden="true" />,
@@ -19,14 +21,14 @@ export const WhyChoose: React.FC = () => {
         <FadeInView direction="up">
           <SectionHeading
             centered
-            kicker="Our Value Proposition"
-            title="A Reliable Partner for Digital and Data-Driven Projects"
-            description="We prioritize methodical quality processes, operational transparency, and active collaboration over arbitrary vanity metrics."
+            kicker={t.whyChoose.kicker}
+            title={t.whyChoose.title}
+            description={t.whyChoose.description}
           />
         </FadeInView>
 
         <StaggerContainer staggerDelay={0.08} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {COMPANY_INFO.whyChoose.map((item, idx) => (
+          {t.whyChoose.items.map((item, idx) => (
             <StaggerItem key={item.title} className="h-full">
               <motion.div
                 whileHover={{ 
@@ -61,3 +63,5 @@ export const WhyChoose: React.FC = () => {
     </section>
   );
 };
+
+export default WhyChoose;

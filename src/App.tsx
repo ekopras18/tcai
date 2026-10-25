@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { NavigationProvider, useNavigation } from "./context/NavigationContext";
+import { LanguageProvider } from "./context/LanguageContext";
 import { Navbar } from "./components/layout/Navbar";
 import { Footer } from "./components/layout/Footer";
 import { PageLoader } from "./components/ui/PageLoader";
@@ -60,7 +61,10 @@ const PageRenderer: React.FC = () => {
 export default function App() {
   return (
     <NavigationProvider>
-      <PageRenderer />
+      <LanguageProvider>
+        <PageRenderer />
+      </LanguageProvider>
     </NavigationProvider>
   );
 }
+

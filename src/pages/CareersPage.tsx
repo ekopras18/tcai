@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext";
 import { Breadcrumbs } from "../components/ui/Breadcrumbs";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { CAREERS_DATA, CareerCategory } from "../data/careers";
@@ -16,6 +17,8 @@ import {
 } from "lucide-react";
 
 export const CareersPage: React.FC = () => {
+  const { language, t } = useLanguage();
+  const isThai = language === "th";
   const [selectedRole, setSelectedRole] = useState<CareerCategory | null>(null);
   const [copied, setCopied] = useState(false);
 
@@ -60,16 +63,16 @@ Looking forward to hearing from you.`;
       {/* Page Header */}
       <section className="bg-slate-900 text-white pt-10 pb-16 lg:pt-14 lg:pb-20 border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <Breadcrumbs currentPage="Careers & Collaborators" />
+          <Breadcrumbs currentPage={t.pages.careers.breadcrumbs} />
           <FadeInView direction="up" className="max-w-3xl space-y-4 pt-2">
             <p className="text-xs font-semibold tracking-wider uppercase text-cyan-400">
-              Specialist Network
+              {isThai ? "เครือข่ายผู้เชี่ยวชาญเฉพาะด้าน" : "Specialist Network"}
             </p>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight text-balance">
-              Collaborate With TCAI
+              {t.pages.careers.title}
             </h1>
             <p className="text-base sm:text-lg text-slate-300 leading-relaxed text-pretty">
-              We partner with skilled linguists, AI data labeling practitioners, speech technicians, voice talent, and video editors across distributed, project-based workflows.
+              {t.pages.careers.subtitle}
             </p>
           </FadeInView>
         </div>

@@ -1,13 +1,31 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useNavigation } from "../../context/NavigationContext";
-import { MAIN_NAV, FOOTER_SERVICE_LINKS } from "../../data/navigation";
+import { useLanguage } from "../../context/LanguageContext";
 import { COMPANY_INFO } from "../../data/company";
 import { Mail, ArrowRight, ShieldCheck } from "lucide-react";
 
 export const Footer: React.FC = () => {
   const { navigate } = useNavigation();
+  const { t } = useLanguage();
   const currentYear = 2026;
+
+  const navItems = [
+    { name: t.nav.home, href: "/", id: "home" },
+    { name: t.nav.about, href: "/about", id: "about" },
+    { name: t.nav.services, href: "/services", id: "services" },
+    { name: t.nav.industries, href: "/industries", id: "industries" },
+    { name: t.nav.careers, href: "/careers", id: "careers" },
+    { name: t.nav.contact, href: "/contact", id: "contact" }
+  ];
+
+  const serviceLinks = [
+    { name: t.hero.services[0].name, href: "/services?item=translate" },
+    { name: t.hero.services[1].name, href: "/services?item=asr" },
+    { name: t.hero.services[2].name, href: "/services?item=tts" },
+    { name: t.hero.services[3].name, href: "/services?item=data-collection" },
+    { name: t.hero.services[4].name, href: "/services?item=video-service" }
+  ];
 
   return (
     <footer className="bg-slate-950 text-slate-400 border-t border-slate-900">
@@ -23,25 +41,25 @@ export const Footer: React.FC = () => {
                 TCAI
               </span>
               <span className="text-xs text-slate-400 font-medium">
-                Information Technology
+                {t.nav.taglineSubtitle}
               </span>
             </motion.div>
             <p className="text-sm text-slate-300 leading-relaxed max-w-sm">
-              {COMPANY_INFO.legalEntity} provides enterprise solutions across Translate, ASR, TTS, Data Collection, and Video Service.
+              {t.footer.legalDescription}
             </p>
             <div className="pt-2 text-xs text-slate-400 flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-cyan-400 shrink-0" aria-hidden="true" />
-              <span>Structured quality controls & strict project confidentiality.</span>
+              <span>{t.footer.qualityStatement}</span>
             </div>
           </div>
 
           {/* Col 2: Navigation */}
           <div className="lg:col-span-2 space-y-4">
             <h3 className="text-xs font-semibold uppercase tracking-wider text-white">
-              Company
+              {t.footer.companyHeading}
             </h3>
             <ul className="space-y-2.5 text-sm">
-              {MAIN_NAV.map((item) => (
+              {navItems.map((item) => (
                 <li key={item.id}>
                   <motion.button
                     whileHover={{ x: 3, color: "#ffffff" }}
@@ -59,10 +77,10 @@ export const Footer: React.FC = () => {
           {/* Col 3: Services */}
           <div className="lg:col-span-3 space-y-4">
             <h3 className="text-xs font-semibold uppercase tracking-wider text-white">
-              Core Services
+              {t.footer.servicesHeading}
             </h3>
             <ul className="space-y-2.5 text-sm">
-              {FOOTER_SERVICE_LINKS.map((service, idx) => (
+              {serviceLinks.map((service, idx) => (
                 <li key={idx}>
                   <motion.button
                     whileHover={{ x: 3, color: "#ffffff" }}
@@ -80,10 +98,10 @@ export const Footer: React.FC = () => {
           {/* Col 4: Official Communication & Inquiry */}
           <div className="lg:col-span-3 space-y-4">
             <h3 className="text-xs font-semibold uppercase tracking-wider text-white">
-              Project Inquiries
+              {t.footer.inquiriesHeading}
             </h3>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Have specifications, language requirements, or dataset volumes to review? Connect with our project desk.
+              {t.footer.inquiriesDescription}
             </p>
             <div className="pt-1">
               <motion.a
@@ -104,7 +122,7 @@ export const Footer: React.FC = () => {
                 onClick={() => navigate("/contact")}
                 className="inline-flex items-center gap-2 text-xs font-medium text-white bg-slate-800 px-3 py-2 rounded transition-colors cursor-pointer shadow-xs"
               >
-                <span>Draft project inquiry</span>
+                <span>{t.footer.draftInquiryBtn}</span>
                 <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
               </motion.button>
             </div>
@@ -114,7 +132,7 @@ export const Footer: React.FC = () => {
         {/* Bottom bar */}
         <div className="mt-16 pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <p>
-            &copy; {currentYear} {COMPANY_INFO.legalEntity}. All rights reserved.
+            &copy; {currentYear} {t.footer.copyrightText}
           </p>
           <div className="flex items-center gap-6">
             <motion.button
@@ -123,7 +141,7 @@ export const Footer: React.FC = () => {
               onClick={() => navigate("/about")}
               className="hover:text-slate-300 transition-colors cursor-pointer"
             >
-              About Organization
+              {t.footer.aboutOrg}
             </motion.button>
             <motion.button
               whileHover={{ color: "#ffffff", y: -1 }}
@@ -131,7 +149,7 @@ export const Footer: React.FC = () => {
               onClick={() => navigate("/careers")}
               className="hover:text-slate-300 transition-colors cursor-pointer"
             >
-              Collaborator Network
+              {t.footer.collaboratorNetwork}
             </motion.button>
             <motion.button
               whileHover={{ color: "#ffffff", y: -1 }}
@@ -139,7 +157,7 @@ export const Footer: React.FC = () => {
               onClick={() => navigate("/contact")}
               className="hover:text-slate-300 transition-colors cursor-pointer"
             >
-              Contact Desk
+              {t.footer.contactDesk}
             </motion.button>
           </div>
         </div>
@@ -147,3 +165,5 @@ export const Footer: React.FC = () => {
     </footer>
   );
 };
+
+export default Footer;

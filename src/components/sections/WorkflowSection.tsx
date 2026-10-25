@@ -1,26 +1,28 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { COMPANY_INFO } from "../../data/company";
+import { useLanguage } from "../../context/LanguageContext";
 import { SectionHeading } from "../ui/SectionHeading";
 import { FadeInView, StaggerContainer, StaggerItem } from "../ui/FadeInView";
 import { Check } from "lucide-react";
 
 export const WorkflowSection: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="py-20 lg:py-28 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         <FadeInView direction="up">
           <SectionHeading
             centered
-            kicker="Methodology"
-            title="Our Project Workflow"
-            description="A structured four-phase delivery methodology designed to eliminate ambiguities, safeguard data integrity, and guarantee rubric compliance."
+            kicker={t.workflow.kicker}
+            title={t.workflow.title}
+            description={t.workflow.description}
           />
         </FadeInView>
 
         {/* Stepper Grid */}
         <StaggerContainer staggerDelay={0.1} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-          {COMPANY_INFO.workflow.map((step, idx) => (
+          {t.workflow.steps.map((step, idx) => (
             <StaggerItem key={step.number} className="h-full">
               <motion.div
                 whileHover={{ 
@@ -87,3 +89,5 @@ export const WorkflowSection: React.FC = () => {
     </section>
   );
 };
+
+export default WorkflowSection;
