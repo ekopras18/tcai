@@ -66,6 +66,14 @@ export const ServicesOverview: React.FC = () => {
     }
   };
 
+  const serviceImages: Record<string, string> = {
+    translate: "https://i.postimg.cc/Xv1tMNsY/image1.jpg",
+    asr: "https://i.postimg.cc/nLSN8V3q/image2.jpg",
+    tts: "https://i.postimg.cc/1z7bxRvP/image3.jpg",
+    "data-collection": "https://i.postimg.cc/1z7bxRv4/image4.jpg",
+    "video-service": "https://i.postimg.cc/g0t19cgc/image5.jpg"
+  };
+
   return (
     <section className="py-20 lg:py-28 bg-slate-50 border-b border-slate-200" id="services-overview">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
@@ -91,6 +99,7 @@ export const ServicesOverview: React.FC = () => {
           {t.servicesOverview.services.map((svc, index) => {
             const theme = getThemeClasses(svc.id);
             const icon = serviceIcons[svc.id as keyof typeof serviceIcons] || serviceIcons.translate;
+            const imageUrl = serviceImages[svc.id];
 
             return (
               <StaggerItem
@@ -103,62 +112,76 @@ export const ServicesOverview: React.FC = () => {
                     boxShadow: "0 14px 30px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.03)"
                   }}
                   transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] as const }}
-                  className={`h-full bg-white rounded-xl border border-slate-200 ${theme.hoverBorder} p-7 flex flex-col justify-between transition-colors group relative overflow-hidden`}
+                  className={`h-full bg-white rounded-xl border border-slate-200 ${theme.hoverBorder} flex flex-col justify-between transition-colors group relative overflow-hidden`}
                 >
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
+                  {/* Card Visual Image Banner */}
+                  <div className="relative h-44 w-full overflow-hidden bg-slate-900 shrink-0">
+                    <img
+                      src={imageUrl}
+                      alt={svc.title}
+                      referrerPolicy="no-referrer"
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
+                    
+                    <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
                       <motion.div
                         whileHover={{ scale: 1.08 }}
                         transition={{ duration: 0.15 }}
-                        className={`w-12 h-12 rounded-xl ${theme.iconBg} border flex items-center justify-center shadow-2xs`}
+                        className={`w-9 h-9 rounded-lg ${theme.iconBg} border flex items-center justify-center shadow-md bg-white/95 backdrop-blur-xs`}
                       >
                         {icon}
                       </motion.div>
                       
                       {/* Domain Telemetry Snippet */}
-                      <span className="font-mono text-[11px] text-slate-500 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                      <span className="font-mono text-[11px] text-white bg-slate-900/80 backdrop-blur-xs px-2 py-0.5 rounded border border-white/20">
                         {svc.domainSnippet}
                       </span>
                     </div>
-
-                    <div>
-                      {/* Zero-pill: clean text metadata */}
-                      <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
-                        <span>{svc.category}</span>
-                      </div>
-                      <h3 className={`text-xl font-bold text-slate-900 tracking-tight ${theme.textHover} transition-colors`}>
-                        {svc.title}
-                      </h3>
-                    </div>
-
-                    <p className="text-sm text-slate-600 leading-relaxed">
-                      {svc.description}
-                    </p>
-
-                    {/* Contextual Spec Badges */}
-                    <div className="pt-2 flex flex-wrap gap-1.5 font-mono text-[11px] text-slate-600">
-                      {svc.specs.map((sp, sIdx) => (
-                        <span key={sIdx} className="px-2 py-0.5 rounded bg-slate-50 border border-slate-200 text-slate-700">
-                          {sp}
-                        </span>
-                      ))}
-                    </div>
                   </div>
 
-                  <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
-                    <span className="text-xs font-semibold text-slate-500 font-mono">
-                      {svc.metricBadge}
-                    </span>
-                    <motion.button
-                      whileHover={{ x: 4 }}
-                      whileTap={{ scale: 0.98 }}
-                      transition={{ duration: 0.15 }}
-                      onClick={() => navigate(`/services?item=${svc.id}`)}
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-900 group-hover:text-blue-600 transition-colors cursor-pointer"
-                    >
-                      <span>{t.servicesOverview.scopeDetailsBtn}</span>
-                      <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-                    </motion.button>
+                  <div className="p-6 flex flex-col flex-1 justify-between">
+                    <div className="space-y-4">
+                      <div>
+                        {/* Zero-pill: clean text metadata */}
+                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
+                          <span>{svc.category}</span>
+                        </div>
+                        <h3 className={`text-xl font-bold text-slate-900 tracking-tight ${theme.textHover} transition-colors`}>
+                          {svc.title}
+                        </h3>
+                      </div>
+
+                      <p className="text-sm text-slate-600 leading-relaxed">
+                        {svc.description}
+                      </p>
+
+                      {/* Contextual Spec Badges */}
+                      <div className="pt-2 flex flex-wrap gap-1.5 font-mono text-[11px] text-slate-600">
+                        {svc.specs.map((sp, sIdx) => (
+                          <span key={sIdx} className="px-2 py-0.5 rounded bg-slate-50 border border-slate-200 text-slate-700">
+                            {sp}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="pt-5 mt-6 border-t border-slate-100 flex items-center justify-between">
+                      <span className="text-xs font-semibold text-slate-500 font-mono">
+                        {svc.metricBadge}
+                      </span>
+                      <motion.button
+                        whileHover={{ x: 4 }}
+                        whileTap={{ scale: 0.98 }}
+                        transition={{ duration: 0.15 }}
+                        onClick={() => navigate(`/services?item=${svc.id}`)}
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-900 group-hover:text-blue-600 transition-colors cursor-pointer"
+                      >
+                        <span>{t.servicesOverview.scopeDetailsBtn}</span>
+                        <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                      </motion.button>
+                    </div>
                   </div>
                 </motion.div>
               </StaggerItem>

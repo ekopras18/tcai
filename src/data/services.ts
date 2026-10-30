@@ -67,6 +67,7 @@ export const SERVICES_DATA: ServiceItem[] = [
       { label: "File Formats", value: "JSON, XLIFF, PO, YAML, Markdown, DOCX" },
       { label: "Register Fidelity", value: "Strict cultural, legal & technical register" }
     ],
+    image: "https://i.postimg.cc/Xv1tMNsY/image1.jpg",
     description:
       "Accurate human-powered translation tailored for technical manuals, enterprise software interfaces, marketing collateral, and cross-border communications. Our qualified native linguists ensure semantic fidelity, appropriate cultural register, and consistent terminology management across diverse language pairs.",
     scopeOfWork: [
@@ -177,7 +178,7 @@ export const SERVICES_DATA: ServiceItem[] = [
       { label: "Multi-Speaker", value: "Overlap tagging and speaker diarization audit" },
       { label: "Lexicon Coverage", value: "Domain phonetic dictionaries & colloquial mapping" }
     ],
-    image: "/src/assets/images/tcai_speech_studio_waveform_1792764142771.jpg",
+    image: "https://i.postimg.cc/nLSN8V3q/image2.jpg",
     description:
       "Comprehensive acoustic engineering support for automated speech recognition engines. We deliver time-aligned phonetic transcriptions, speaker diarization validation, dialectal pronunciation mapping, and acoustic condition tagging across studio and real-world noisy environments.",
     scopeOfWork: [
@@ -288,6 +289,7 @@ export const SERVICES_DATA: ServiceItem[] = [
       { label: "Phonetic Integrity", value: "Grapheme-to-Phoneme (G2P) error detection" },
       { label: "Cadence & Pacing", value: "Natural breath placement & micro-pause auditing" }
     ],
+    image: "https://i.postimg.cc/1z7bxRvP/image3.jpg",
     description:
       "End-to-end dataset engineering and subjective quality evaluation for neural voice synthesis. We conduct human subjective listening tests (Mean Opinion Score - MOS), prosody assessments, stress pattern auditing, and pronunciation dictionary curation to ensure expressive, natural-sounding synthetic speech.",
     scopeOfWork: [
@@ -398,7 +400,7 @@ export const SERVICES_DATA: ServiceItem[] = [
       { label: "Agreement Metrics", value: "Cohen's Kappa & multi-tier consensus arbitration" },
       { label: "Safety & Privacy", value: "Verified participant consent & strict PII scrubbing" }
     ],
-    image: "/src/assets/images/tcai_data_annotation_workflow_1792764141771.jpg",
+    image: "https://i.postimg.cc/1z7bxRv4/image4.jpg",
     description:
       "Targeted data collection and annotation workflows designed to supply machine learning models with verified ground-truth data. We coordinate field and studio speech corpus collection, conversational dialogue gathering, domain-specific text datasets, and multi-tier labeling under rigorous quality assurance schemas.",
     scopeOfWork: [
@@ -509,7 +511,7 @@ export const SERVICES_DATA: ServiceItem[] = [
       { label: "Timed Subtitling", value: "Burn-in & closed-caption exports (SRT, VTT, CEA)" },
       { label: "Multi-Platform Cuts", value: "16:9 widescreen, 9:16 vertical & 1:1 square" }
     ],
-    image: "/src/assets/images/tcai_media_production_suite_1792764142163.jpg",
+    image: "https://i.postimg.cc/g0t19cgc/image5.jpg",
     description:
       "End-to-end digital video production and post-production editing services. We create polished product demos, dynamic motion graphics, localized marketing cutdowns, and synchronized multilingual subtitles for technology companies and creative digital brands.",
     scopeOfWork: [
