@@ -186,54 +186,54 @@ export const TRANSLATIONS: Record<Language, TranslationDictionary> = {
       taglineSubtitle: "Information Technology"
     },
     hero: {
-      companyBadge: "TCAI Information Technology co. ltd.",
-      title: "Precision Language, Speech & AI Data Services",
+      companyBadge: "PROFESSIONAL DIGITAL SERVICES",
+      title: "Connecting Languages, Voices, Data & Visual Experiences.",
       description:
-        "Specialized in five foundational disciplines: Translate, ASR, TTS, Data Collection, and Video Service. We unite certified native human expertise with production-grade engineering workflows.",
-      exploreServicesBtn: "Explore All 5 Services",
-      discussProjectBtn: "Discuss a Project",
-      trustPoint1: "Dual Human-in-the-Loop QA",
-      trustPoint2: "ISO 17100 Alignment",
-      trustPoint3: "Enterprise NDA & PII Security",
-      pillarsHeader: "Core Disciplines & Production Services",
-      pillarsCount: "5 Capabilities",
-      clickToViewSpecs: "Click any discipline to view technical specifications",
-      productionReadyBadge: "Production-Ready",
+        "Comprehensive solutions for global communication and digital content. From multilingual translation and speech recognition to voice production, data collection, and professional video services.",
+      exploreServicesBtn: "Explore Our Services",
+      discussProjectBtn: "Get in Touch",
+      trustPoint1: "Global Reach & Native Linguists",
+      trustPoint2: "Studio & Broadcast Standards",
+      trustPoint3: "Enterprise Confidentiality & QA",
+      pillarsHeader: "Core Digital Services",
+      pillarsCount: "5 Disciplines",
+      clickToViewSpecs: "Explore service details and technical capabilities",
+      productionReadyBadge: "Enterprise Ready",
       services: [
         {
           id: "translate",
           name: "Translate",
-          category: "Localization & Linguistics",
-          summary: "Human translation & software string localization across 40+ language pairs.",
-          badgeText: "Native TEP Review"
+          category: "Language & Localization",
+          summary: "Language translation and localization.",
+          badgeText: "01"
         },
         {
           id: "asr",
-          name: "ASR (Speech Recognition)",
-          category: "Acoustic AI",
-          summary: "Acoustic corpora preparation, phonetic timestamps & dialect model tuning.",
-          badgeText: "Acoustic Corpora"
+          name: "ASR",
+          category: "Speech Recognition",
+          summary: "Speech-to-text solutions.",
+          badgeText: "02"
         },
         {
           id: "tts",
-          name: "TTS (Text-to-Speech)",
-          category: "Voice Synthesis",
-          summary: "Neural voice calibration, SSML prosody design & natural conversational audio.",
-          badgeText: "Prosody & Voice Tuning"
+          name: "TTS",
+          category: "Voice Production",
+          summary: "Natural text-to-speech production.",
+          badgeText: "03"
         },
         {
           id: "data-collection",
           name: "Data Collection",
-          category: "AI Training Corpora",
-          summary: "Demographic speech recording, high-agreement annotation & PII scrubbing.",
-          badgeText: "Ethical AI Datasets"
+          category: "Data Solutions",
+          summary: "Reliable data gathering and annotation.",
+          badgeText: "04"
         },
         {
           id: "video-service",
           name: "Video Service",
-          category: "Multilingual Media",
-          summary: "Frame-accurate subtitling, localized on-screen typography & master post-editing.",
-          badgeText: "Broadcast Frame Sync"
+          category: "Media Production",
+          summary: "Professional video production and processing.",
+          badgeText: "05"
         }
       ]
     },
@@ -504,54 +504,54 @@ export const TRANSLATIONS: Record<Language, TranslationDictionary> = {
       taglineSubtitle: "เทคโนโลยีสารสนเทศ"
     },
     hero: {
-      companyBadge: "TCAI Information Technology co. ltd.",
-      title: "บริการความแม่นยำสูงด้านภาษา เสียงพูด และชุดข้อมูล AI",
+      companyBadge: "บริการดิจิทัลระดับมืออาชีพ (PROFESSIONAL DIGITAL SERVICES)",
+      title: "เชื่อมโยงภาษา เสียง ข้อมูล และประสบการณ์ทางภาพอย่างไร้รอยต่อ",
       description:
-        "เชี่ยวชาญ 5 มิติหลัก: แปลภาษา (Translate), รู้จำเสียงพูด (ASR), สังเคราะห์เสียงพูด (TTS), เก็บรวบรวมชุดข้อมูล AI (Data Collection) และ บริการงานวิดีโอ (Video Service) ผสานความเชี่ยวชาญของมนุษย์กับวิศวกรรมข้อมูลระดับมาตรฐานสากล",
-      exploreServicesBtn: "ดูบริการทั้ง 5 ด้าน",
-      discussProjectBtn: "ปรึกษาโครงการ",
-      trustPoint1: "ตรวจสอบคุณภาพโดยผู้เชี่ยวชาญ (Human-in-the-Loop)",
-      trustPoint2: "มาตรฐานสากลระดับ ISO 17100",
-      trustPoint3: "ความปลอดภัยระดับองค์กร NDA & PII",
-      pillarsHeader: "5 สาขาความเชี่ยวชาญหลักและการส่งมอบงาน",
-      pillarsCount: "5 บริการหลัก",
-      clickToViewSpecs: "คลิกเลือกบริการเพื่อดูรายละเอียดและสเปกทางเทคนิค",
-      productionReadyBadge: "พร้อมส่งมอบระดับองค์กร",
+        "โซลูชันครบวงจรสำหรับการสื่อสารระดับโลกและเนื้อหาดิจิทัล ตั้งแต่การแปลหลายภาษาและการรู้จำเสียงพูด ไปจนถึงการผลิตเสียงสังเคราะห์ การเก็บรวบรวมข้อมูล และบริการงานวิดีโอระดับมืออาชีพ",
+      exploreServicesBtn: "สำรวจบริการของเรา",
+      discussProjectBtn: "ติดต่อเรา (Get in Touch)",
+      trustPoint1: "ครอบคลุมทั่วโลกโดยนักภาษาศาสตร์เจ้าของภาษา",
+      trustPoint2: "มาตรฐานวิศวกรรมสตูดิโอและบรอดคาสต์",
+      trustPoint3: "ความปลอดภัยของข้อมูลและการประกันคุณภาพเข้มงวด",
+      pillarsHeader: "5 บริการดิจิทัลหลัก",
+      pillarsCount: "5 สาขาบริการ",
+      clickToViewSpecs: "เลือกบริการเพื่อดูรายละเอียดและขีดความสามารถ",
+      productionReadyBadge: "มาตรฐานระดับองค์กร",
       services: [
         {
           id: "translate",
-          name: "แปลภาษา (Translate)",
+          name: "Translate",
           category: "ภาษาและการปรับให้เหมาะกับท้องถิ่น",
-          summary: "การแปลโดยผู้เชี่ยวชาญภาษาและการปรับเนื้อหาซอฟต์แวร์กว่า 40+ คู่ภาษา",
-          badgeText: "ตรวจสอบ TEP สองระดับ"
+          summary: "การแปลภาษาและการปรับเนื้อหาให้เข้ากับท้องถิ่น",
+          badgeText: "01"
         },
         {
           id: "asr",
-          name: "รู้จำเสียงพูด ASR",
-          category: "Acoustic AI & การรู้จำเสียง",
-          summary: "จัดเตรียมคลังข้อมูลเสียง ตรวจจับ Timecode ระดับโฟเนติก และจูนโมเดลเสียง",
-          badgeText: "คลังข้อมูลเสียงอะคูสติก"
+          name: "ASR",
+          category: "การรู้จำเสียงพูด",
+          summary: "โซลูชันแปลงเสียงพูดเป็นข้อความ",
+          badgeText: "02"
         },
         {
           id: "tts",
-          name: "สังเคราะห์เสียงพูด TTS",
-          category: "วิศวกรรมเสียงสังเคราะห์",
-          summary: "ปรับเทียบเสียงประสาทวิทยา การออกแบบวรรณยุกต์ SSML และประเมินความสมจริง",
-          badgeText: "จูนจังหวะและเนื้อเสียง"
+          name: "TTS",
+          category: "การผลิตเสียงพูด",
+          summary: "การผลิตเสียงสังเคราะห์ที่เป็นธรรมชาติ",
+          badgeText: "03"
         },
         {
           id: "data-collection",
-          name: "เก็บรวบรวมชุดข้อมูล AI",
-          category: "ชุดข้อมูลฝึกฝนโมเดล AI",
-          summary: "บันทึกเสียงตามกลุ่มประชากร การกำกับข้อมูลความแม่นยำสูง และคัดกรอง PII",
-          badgeText: "ชุดข้อมูล AI ถูกต้องตามจริยธรรม"
+          name: "Data Collection",
+          category: "โซลูชันข้อมูล",
+          summary: "การรวบรวมและกำกับข้อมูลที่เชื่อถือได้",
+          badgeText: "04"
         },
         {
           id: "video-service",
-          name: "บริการงานวิดีโอ (Video Service)",
-          category: "สื่อและวิดีโอหลายภาษา",
-          summary: "คำบรรยายซิงค์ระดับเฟรม กราฟิกบนหน้าจอหลายภาษา และตัดต่อตกแต่งขั้นสูง",
-          badgeText: "ซิงค์คำบรรยายระดับเฟรม"
+          name: "Video Service",
+          category: "การผลิตสื่อวิดีโอ",
+          summary: "การผลิตและประมวลผลวิดีโอระดับมืออาชีพ",
+          badgeText: "05"
         }
       ]
     },
